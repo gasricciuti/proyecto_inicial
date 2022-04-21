@@ -50,6 +50,17 @@ if __name__ == "__main__":
             writer.writerow(nuevo_contacto)
             csvfile.close()
             print('El contacto fue añadido.')
+            
+        elif opcion == '3':            
+            telefono = input('Ingrese su telefono: ')
+            csvfile = open('lista_contactos.csv')
+            contactos = list(csv.DictReader(csvfile))
+            for contacto in contactos:
+                if contacto['phone'] == telefono:
+                    telefono_modificado = input('Ingrese el nuevo numero: ')
+                    contacto['phone'] = telefono_modificado
+                    print('Modificado')
+            csvfile.close()
 
     else:
         print('Hasta la proxima.')
