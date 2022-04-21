@@ -3,10 +3,9 @@ import csv
 if __name__ == "__main__":
     print('AGENDA DE CONTACTOS')
 
-    
-    opcion = ''
+    opcion = 0
 
-    while opcion != '5': #while opcion != '5', donde 5 es la opcion para salir de mi ciclo
+    while 0 < opcion <=  5:  # while opcion != '5', donde 5 es la opcion para salir de mi ciclo
         print()
         print('AGENDA DE CONTACOS')
         print('******************')
@@ -31,10 +30,10 @@ if __name__ == "__main__":
             contactos = list(csv.DictReader(csvfile))
             for contacto in contactos:
                 if contacto['phone'] == telefono:
-                    print('Nombre del Contacto: ', contacto['nombre'])
-                    print('Numero de telefono: ', contacto['phone'])
+                    print('Nombre del Contacto:', contacto['nombre'])
+                    print('Numero de telefono:', contacto['phone'])
             csvfile.close()
-                        
+
         elif opcion == '2':
             # nuevoContacto = {'phone': numero_telefono, 'nombre': nombre_contacto}
             # csvfile = open('lista_contactos.csv', 'w', newline='')
@@ -45,13 +44,14 @@ if __name__ == "__main__":
             nuevo_contacto = {}
             nuevo_contacto['phone'] = input('Ingrese su telefono: ')
             nuevo_contacto['nombre'] = input('Ingrese su nombre: ')
-            csvfile = open('lista_contactos.csv', 'w')
-            headers = ['phone' , 'nombre']
+            csvfile = open('lista_contactos.csv', 'a', newline='')
+            headers = ['phone', 'nombre']
             writer = csv.DictWriter(csvfile, fieldnames=headers)
-            writer.writeheader()
             writer.writerow(nuevo_contacto)
-            writer.
             csvfile.close()
-            print('El contacto fue agregado.')
+            print('El contacto fue añadido.')
 
-            
+    else:
+        print('Hasta la proxima.')
+
+        
