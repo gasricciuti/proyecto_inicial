@@ -47,6 +47,7 @@ if __name__ == "__main__":
             csvfile = open('lista_contactos.csv', 'a', newline='')
             headers = ['phone', 'nombre']
             writer = csv.DictWriter(csvfile, fieldnames=headers)
+            writer.writeheader()
             writer.writerow(nuevo_contacto)
             csvfile.close()
             print('El contacto fue añadido.')
