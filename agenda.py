@@ -1,23 +1,12 @@
-
-
 import csv
-
-contactos = [{'phone': '1234', 'nombre': 'gaston'}]
-
-with open('lista_contactos.csv', 'w', newline='') as file:
-    writer = csv.writer(file)
-    writer.writerow(contactos)
-
-    for telf in contactos:
-        print(telf['phone'])
-
 
 if __name__ == "__main__":
     print('AGENDA DE CONTACTOS')
 
-    menu = True
+    
+    opcion = ''
 
-    while menu:
+    while opcion != '5': #while opcion != '5', donde 5 es la opcion para salir de mi ciclo
         print()
         print('AGENDA DE CONTACOS')
         print('******************')
@@ -28,30 +17,41 @@ if __name__ == "__main__":
         print('5. Salir')
         print('******************')
 
-        opcion = ''
-        while opcion not in ('1', '2', '3', '4, 5'):
-            opcion = input('Ingrese una opcion: ')
+        opcion = input('Ingrese una opcion: ')
 
-            if opcion == '1':
-                telefono = input('Ingresar telefono: ')
-                if telefono not in telf['phone']:
-                    print('Ese contacto no existe')
-                else:
-                    consultar = telf['nombre']
-                    print('Contacto', consultar,
-                          '\n''Telefono', telefono)
+        if opcion == '1':
+            # Generar lista de contactos a partir del archivo CSV (csvfile)
+            # contactos = list(csv.DictReader(csvfile))
+            # Utilizar for para recorrer la lista de contactos
+            # ejemplo: for contacto in contactos:
+            #               if contacto['phone'] == telefono
+            #                   print(contacto)contacto['nombre']
+            telefono = input('Ingrese su telefono: ')
+            csvfile = open('lista_contactos.csv')
+            contactos = list(csv.DictReader(csvfile))
+            for contacto in contactos:
+                if contacto['phone'] == telefono:
+                    print('Nombre del Contacto: ', contacto['nombre'])
+                    print('Numero de telefono: ', contacto['phone'])
+            csvfile.close()
+                        
+        elif opcion == '2':
+            # nuevoContacto = {'phone': numero_telefono, 'nombre': nombre_contacto}
+            # csvfile = open('lista_contactos.csv', 'w', newline='')
+            # header = ['phone','nombre']
+            # writer = csv.DictWriter(csvfile, fieldnames=header)
+            # writer.writeheader()
+            # writer.writerow(nuevoContacto)
+            nuevo_contacto = {}
+            nuevo_contacto['phone'] = input('Ingrese su telefono: ')
+            nuevo_contacto['nombre'] = input('Ingrese su nombre: ')
+            csvfile = open('lista_contactos.csv', 'w')
+            headers = ['phone' , 'nombre']
+            writer = csv.DictWriter(csvfile, fieldnames=headers)
+            writer.writeheader()
+            writer.writerow(nuevo_contacto)
+            writer.
+            csvfile.close()
+            print('El contacto fue agregado.')
 
-            elif opcion == '2':
-                telefono = input('Ingresar telefono: ')
-                if telefono in telf['phone']:
-                    print('Ese telefono ya esta registrado')
-                else:
-                    nuevo = input('Ingrese su nombre y apellido: ')
-                    telf['phone'] = telefono
-                    telf['nombre'] = nuevo
-                    print('Contacto nuevo agregado')
-
-            elif opcion == '5':
-                menu = False
-                break
-file.close()
+            
