@@ -5,7 +5,7 @@ if __name__ == "__main__":
 
     opcion = 0
 
-    while 0 < opcion <=  5:  # while opcion != '5', donde 5 es la opcion para salir de mi ciclo
+    while opcion != '5': # while opcion != '5', donde 5 es la opcion para salir de mi ciclo
         print()
         print('AGENDA DE CONTACOS')
         print('******************')
