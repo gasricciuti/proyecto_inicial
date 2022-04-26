@@ -1,7 +1,5 @@
 import csv
 
-from click import clear
-
 csvfile = open('lista_contactos.csv')
 contactos = list(csv.DictReader(csvfile))
 
@@ -43,7 +41,7 @@ def modificar():
     contador = 0
     for numeros in contactos:
         if numeros['phone'] == numero_modificar:
-            del numeros['phone']                                  
+            del numeros['phone']                                
             contador += 1       
             nuevo_contacto['phone'] = input('Ingrese el nuevo numero: ')
             nuevo_contacto['nombre'] = input('Ingrese el nombre: ')
@@ -61,6 +59,19 @@ def modificar():
                 csvfile.close()
 
             print('El contacto fue modificado')
+    if contador == 0:
+        print('Numero no existente')
+
+def borrar():
+    numero_borrar = input('Ingresa el numero a borrar: ')
+    contador = 0
+    for numeros in contactos:
+        if numeros['phone'] == numero_borrar:
+            del numeros['nombre']
+            del numeros['phone']
+            contador += 1
+            print('El numero fue borrado')
+
     if contador == 0:
         print('Numero no existente')
 
