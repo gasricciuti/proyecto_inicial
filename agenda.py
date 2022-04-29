@@ -17,9 +17,23 @@ def consultar():
         print('Numero no existente')
             
 def anadir():
+    csvfile = open('lista_contactos.csv')
+    contactos = list(csv.DictReader(csvfile))
+
+    nuevo_telefono = input('Ingrese el telefono: ')
+    nuevo_nombre = input('Ingrese el nombre: ')
     nuevo_contacto = {}
-    nuevo_contacto['phone'] = input('Ingrese el telefono: ')
-    nuevo_contacto['nombre'] = input('Ingrese el nombre: ')
+    contador = 0
+    for contacto in contactos:
+        if contacto['phone'] == nuevo_telefono:
+            contador += 1
+            print('El numero ya existe para un contacto.')
+    if contador == 0:
+        nuevo_contacto['phone'] = nuevo_telefono
+        nuevo_contacto['nombre'] = nuevo_nombre
+        print('El contacto fue añadido.')
+
+    csvfile.close()
 
     with open('lista_contactos.csv', 'r') as csvfile:
         file_has_data = csvfile.read(1)
@@ -33,47 +47,79 @@ def anadir():
 
         writer.writerow(nuevo_contacto)
         csvfile.close()
-    print('El contacto fue añadido.')
 
 def modificar():
+    csvfile = open('lista_contactos.csv')
+    contactos = list(csv.DictReader(csvfile))
+
+    contador = 0
+    suma = 0
+    contacto_borrar = (input('Ingresar el numero a modificar: '))
+    for contacto in contactos:
+        contador += 1
+        if contacto['phone'] == contacto_borrar:
+            suma += 1
+            del contactos[contador-1]
+    if suma == 0:
+        print('Numero no existente')
+
+    csvfile.close()
+
+    csvfile = open('lista_contactos.csv', 'w', newline='')
+    header = ['phone', 'nombre']
+
+    writer = csv.DictWriter(csvfile, fieldnames=header)
+    writer.writeheader()
+    writer.writerows(contactos)
+    csvfile.close()
+
+    nuevo_telefono = input('Ingrese el telefono: ')
+    nuevo_nombre = input('Ingrese el nombre: ')
     nuevo_contacto = {}
-    numero_modificar = input('Ingrese el numero a modificar: ')
-    contador = 0
-    for numeros in contactos:
-        if numeros['phone'] == numero_modificar:
-            del numeros['phone']                                
-            contador += 1       
-            nuevo_contacto['phone'] = input('Ingrese el nuevo numero: ')
-            nuevo_contacto['nombre'] = input('Ingrese el nombre: ')
-            with open('lista_contactos.csv', 'r') as csvfile:
-                file_has_data = csvfile.read(1)
 
-            with open('lista_contactos.csv', 'a', newline='') as csvfile:
-                headers = ['phone', 'nombre']
-                writer = csv.DictWriter(csvfile, fieldnames=headers)
+    nuevo_contacto['phone'] = nuevo_telefono
+    nuevo_contacto['nombre'] = nuevo_nombre
 
-                if not file_has_data:
-                    writer.writeheader()
+    print('El contacto fue modificado.')
 
-                writer.writerow(nuevo_contacto)
-                csvfile.close()
+    with open('lista_contactos.csv', 'r') as csvfile:
+        file_has_data = csvfile.read(1)
 
-            print('El contacto fue modificado')
-    if contador == 0:
-        print('Numero no existente')
+    with open('lista_contactos.csv', 'a', newline='') as csvfile:
+        headers = ['phone', 'nombre']
+        writer = csv.DictWriter(csvfile, fieldnames=headers)
 
+        if not file_has_data:
+            writer.writeheader()
+
+        writer.writerow(nuevo_contacto)
+        csvfile.close()
+
+    
 def borrar():
-    numero_borrar = input('Ingresa el numero a borrar: ')
+    csvfile = open('lista_contactos.csv')
+    contactos = list(csv.DictReader(csvfile))
     contador = 0
-    for numeros in contactos:
-        if numeros['phone'] == numero_borrar:
-            del numeros['nombre']
-            del numeros['phone']
-            contador += 1
-            print('El numero fue borrado')
-
-    if contador == 0:
+    suma = 0
+    contacto_borrar = (input('Ingresar el numero a borrar: '))
+    for contacto in contactos:
+        contador += 1
+        if contacto['phone'] == contacto_borrar:
+            suma += 1
+            del contactos[contador-1]
+            print('El contacto fue borrado.')
+    if suma == 0:
         print('Numero no existente')
+
+    csvfile.close()
+
+    csvfile = open('lista_contactos.csv', 'w', newline='')
+    header = ['phone', 'nombre']
+
+    writer = csv.DictWriter(csvfile, fieldnames=header)
+    writer.writeheader()
+    writer.writerows(contactos)
+    csvfile.close()
 
 def salir():
     print('SALIR')        
