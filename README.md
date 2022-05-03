@@ -7,7 +7,7 @@ Email: gas.ricciuti@gmail.com
 
 # Descripción
 
-
+![diagrama_flujo](/diagrama_flujo1.jpg)
 
 # Funciones
 ```
