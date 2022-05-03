@@ -1,3 +1,6 @@
+# Autor: Gaston Ricciuti
+# Email: gas.ricciuti@gmail.com
+
 import csv
 
 csvfile = open('lista_contactos.csv')
