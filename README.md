@@ -1,7 +1,7 @@
 ![banner_python](/python_banner.png)
 \
-Autor: Gaston Ricciuti\
-Email: gas.ricciuti@gmail.com
+__Autor: Gaston Ricciuti__\
+__Email: gas.ricciuti@gmail.com__
 
 # AGENDA DE CONTACTOS :notebook_with_decorative_cover:
 
